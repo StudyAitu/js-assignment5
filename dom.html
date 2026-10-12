@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Part 2: DOM Manipulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Part 1</a>
+    <a href="dom.html">Part 2 (DOM)</a>
+    <a href="events.html">Part 3 (Events & Calc)</a>
+    <a href="todo.html">Part 4 (To-Do App)</a>
+</nav>
+
+<div class="container">
+    <h1>Part 2. DOM Manipulation</h1>
+
+    <!-- Task 2 -->
+    <h2>Task 2: Changing Content</h2>
+    <p id="textParagraph">This is the original text of the paragraph.</p>
+    <button id="changeTextBtn">Change Text</button>
+
+    <hr style="margin: 20px 0;">
+
+    <!-- Task 3 -->
+    <h2>Task 3: Changing Styles</h2>
+    <div id="styledDiv">This is a container box for style testing.</div>
+    <button id="changeBgBtn">Change Background Color</button>
+    <button id="changeFontBtn">Change Font Size</button>
+
+    <hr style="margin: 20px 0;">
+
+    <!-- Task 4 -->
+    <h2>Task 4: Creating & Removing Elements</h2>
+    <button id="addItemBtn">Add Item</button>
+    <button id="removeItemBtn">Remove Item</button>
+    <ul id="itemList" style="margin-top: 10px; padding-left: 20px;">
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+</div>
+
+<script>
+    // Task 2: Changing Content
+    const textParagraph = document.getElementById("textParagraph");
+    const changeTextBtn = document.getElementById("changeTextBtn");
+
+    changeTextBtn.addEventListener("click", function() {
+        textParagraph.textContent = "The paragraph text has been successfully changed via JavaScript DOM manipulation!";
+    });
+
+    // Task 3: Changing Styles
+    const styledDiv = document.getElementById("styledDiv");
+    const changeBgBtn = document.getElementById("changeBgBtn");
+    const changeFontBtn = document.getElementById("changeFontBtn");
+
+    changeBgBtn.addEventListener("click", function() {
+        // Случайный цвет фона
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+        styledDiv.style.backgroundColor = randomColor;
+    });
+
+    let isLargeFont = false;
+    changeFontBtn.addEventListener("click", function() {
+        isLargeFont = !isLargeFont;
+        styledDiv.style.fontSize = isLargeFont ? "20px" : "14px";
+    });
+
+    // Task 4: Creating & Removing Elements
+    const addItemBtn = document.getElementById("addItemBtn");
+    const removeItemBtn = document.getElementById("removeItemBtn");
+    const itemList = document.getElementById("itemList");
+
+    addItemBtn.addEventListener("click", function() {
+        const newItem = document.createElement("li");
+        newItem.textContent = "Item " + (itemList.children.length + 1);
+        itemList.appendChild(newItem);
+    });
+
+    removeItemBtn.addEventListener("click", function() {
+        if (itemList.children.length > 0) {
+            itemList.removeChild(itemList.lastElementChild);
+        } else {
+            alert("No items left to remove!");
+        }
+    });
+</script>
+</body>
+</html>
