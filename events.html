@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Part 3: Events & Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Part 1</a>
+    <a href="dom.html">Part 2 (DOM)</a>
+    <a href="events.html">Part 3 (Events & Calc)</a>
+    <a href="todo.html">Part 4 (To-Do App)</a>
+</nav>
+
+<div class="container">
+    <h1>Part 3. Events & Calculator</h1>
+
+    <!-- Task 5 -->
+    <h2>Task 5: Mouse Events</h2>
+    <p>Hover your mouse over the box below:</p>
+    <div id="colorBox"></div>
+
+    <hr style="margin: 20px 0;">
+
+    <!-- Task 6 -->
+    <h2>Task 6: Keyboard Events</h2>
+    <label for="liveInput">Type something:</label>
+    <input type="text" id="liveInput" placeholder="Start typing here...">
+    <p>Live Output: <strong id="outputPreview" style="color: #3498db;"></strong></p>
+
+    <hr style="margin: 20px 0;">
+
+    <!-- Task 7 -->
+    <h2>Task 7: Simple Calculator</h2>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+
+    <div style="margin: 10px 0;">
+        <button onclick="calculate('+')">+</button>
+        <button onclick="calculate('-')">-</button>
+        <button onclick="calculate('*')">*</button>
+        <button onclick="calculate('/')">/</button>
+    </div>
+
+    <h3>Result: <span id="calcResult" style="color: #27ae60;">0</span></h3>
+</div>
+
+<script>
+    // Task 5: Mouse Events
+    const colorBox = document.getElementById("colorBox");
+
+    colorBox.addEventListener("mouseover", function() {
+        colorBox.style.backgroundColor = "#2ecc71"; // Зеленый при наведении
+    });
+
+    colorBox.addEventListener("mouseout", function() {
+        colorBox.style.backgroundColor = "#e74c3c"; // Возврат к исходному красному
+    });
+
+    // Task 6: Keyboard Events
+    const liveInput = document.getElementById("liveInput");
+    const outputPreview = document.getElementById("outputPreview");
+
+    liveInput.addEventListener("keyup", function(event) {
+        outputPreview.textContent = event.target.value;
+    });
+
+    // Task 7: Calculator
+    function calculate(operator) {
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const num2 = parseFloat(document.getElementById("num2").value);
+        const resultSpan = document.getElementById("calcResult");
+
+        if (isNaN(num1) || isNaN(num2)) {
+            resultSpan.textContent = "Please enter valid numbers!";
+            return;
+        }
+
+        let res;
+        switch(operator) {
+            case '+': res = num1 + num2; break;
+            case '-': res = num1 - num2; break;
+            case '*': res = num1 * num2; break;
+            case '/':
+                if(num2 === 0) {
+                    resultSpan.textContent = "Division by zero is not allowed!";
+                    return;
+                }
+                res = num1 / num2;
+                break;
+            default: res = 0;
+        }
+        resultSpan.textContent = res;
+    }
+</script>
+</body>
+</html>
