@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Part 4: Mini Project - To-Do App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Part 1</a>
+    <a href="dom.html">Part 2 (DOM)</a>
+    <a href="events.html">Part 3 (Events & Calc)</a>
+    <a href="todo.html">Part 4 (To-Do App)</a>
+</nav>
+
+<div class="container">
+    <h1>Interactive To-Do List</h1>
+
+    <div style="margin-bottom: 20px;">
+        <label for="taskInput">Task Title / Description:</label>
+        <input type="text" id="taskInput" placeholder="Enter new task...">
+        <button id="addTaskBtn" style="margin-top: 10px;">Add Task</button>
+    </div>
+
+    <h2>To-do list</h2>
+    <div id="taskContainer">
+        <!-- Сюда динамически добавляются задачи -->
+    </div>
+</div>
+
+<script>
+    // Массив для временного хранения задач
+    let tasks = [];
+
+    const taskInput = document.getElementById("taskInput");
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    const taskContainer = document.getElementById("taskContainer");
+
+    addTaskBtn.addEventListener("click", function() {
+        const taskText = taskInput.value.trim();
+        if (taskText === "") {
+            alert("Task text cannot be empty!");
+            return;
+        }
+
+        // Создаем объект задачи
+        const newTask = {
+            id: Date.now(),
+            text: taskText,
+            completed: false
+        };
+
+        tasks.push(newTask);
+        taskInput.value = "";
+        renderTasks();
+    });
+
+    function renderTasks() {
+        taskContainer.innerHTML = "";
+
+        if (tasks.length === 0) {
+            taskContainer.innerHTML = "<p style='color: #888;'>No tasks yet.</p>";
+            return;
+        }
+
+        tasks.forEach((task, index) => {
+            const taskDiv = document.createElement("div");
+            taskDiv.className = "todo-item";
+
+            const span = document.createElement("span");
+            span.textContent = task.text;
+            if (task.completed) {
+                span.classList.add("completed");
+            }
+
+            // Клик по тексту переключает статус выполнения (строка зачеркивания)
+            span.addEventListener("click", function() {
+                tasks[index].completed = !tasks[index].completed;
+                renderTasks();
+            });
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "❌ Delete";
+            deleteBtn.style.backgroundColor = "#e74c3c";
+            deleteBtn.style.padding = "5px 10px";
+
+            deleteBtn.addEventListener("click", function() {
+                tasks.splice(index, 1);
+                renderTasks();
+            });
+
+            taskDiv.appendChild(span);
+            taskDiv.appendChild(deleteBtn);
+            taskContainer.appendChild(taskDiv);
+        });
+    }
+
+    // Первичный рендер
+    renderTasks();
+</script>
+</body>
+</html>
