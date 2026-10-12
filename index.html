@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Part 1: Introduction to JS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Part 1</a>
+    <a href="dom.html">Part 2 (DOM)</a>
+    <a href="events.html">Part 3 (Events & Calc)</a>
+    <a href="todo.html">Part 4 (To-Do App)</a>
+</nav>
+
+<div class="container">
+    <h1>Part 1. Introduction to JavaScript</h1>
+    <p>Open your browser's Developer Console (F12 or Right Click -> Inspect -> Console) to see the output of Task 0 and Task 1.</p>
+</div>
+
+<script>
+    // Task 0. First Script
+    console.log("Student: Ибрай Муратбек");
+    console.log("Group: SE-2529");
+    alert("Hello, JavaScript World!");
+
+    // Task 1. Variables & Operators
+    let studentName = "Ибрай";
+    let studentAge = 18;
+    let isEnrolled = true;
+
+    console.log("--- Variables & Operators ---");
+    console.log("Name:", studentName, "(Type:", typeof studentName, ")");
+    console.log("Age:", studentAge, "(Type:", typeof studentAge, ")");
+    console.log("Enrolled:", isEnrolled, "(Type:", typeof isEnrolled, ")");
+
+    let a = 10;
+    let b = 5;
+    console.log("Arithmetic operations (a = 10, b = 5):");
+    console.log("Addition (a + b) =", a + b);
+    console.log("Subtraction (a - b) =", a - b);
+    console.log("Multiplication (a * b) =", a * b);
+    console.log("Division (a / b) =", a / b);
+
+    let greeting = "Hello, " + studentName + "! Welcome to Astana IT University.";
+    console.log("String Concatenation:", greeting);
+</script>
+</body>
+</html>
